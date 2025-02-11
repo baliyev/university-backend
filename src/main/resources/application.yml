@@ -1,0 +1,74 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /application
+
+spring:
+  main:
+    banner-mode: off
+  application:
+    name: university-backend
+  jackson:
+    date-format: dd.MM.yyyy HH:mm:ss
+    deserialization:
+      accept-float-as-int: false
+
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://localhost:3306/education?createDatabaseIfNotExist=true&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: verysecret
+  jpa:
+    hibernate:
+      ddl-auto: create
+    generate-ddl: false
+    show-sql: true
+    open-in-view: false
+    properties:
+      hibernate:
+        default_schema: education
+  data:
+    redis:
+      repositories:
+        enabled: false
+
+management:
+  health:
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true
+  server:
+    port: 8081
+  endpoints:
+    web:
+      exposure:
+        include: info, health
+    enabled-by-default: false
+  endpoint:
+    health:
+      probes:
+        enabled: true
+      show-details: always
+      enabled: true
+    metrics:
+      enabled: false
+    info:
+      enabled: true
+
+logging:
+  level:
+    az.edu.asoiu: debug
+    org:
+      springframework:
+        web:
+          filter:
+            CommonsRequestLoggingFilter: debug
+
+application:
+  security:
+    jwt:
+      secret-key: 0bAKVmwgk9JtFVA5Jz3mTyx1uUn1hEW/aRPbxYprxbn+ik/mtP+DLKJ3WLg4Lt+WE/0XZTK59OU9ocrZ+9PXs9ZH9ZCi6LSEYHAUT0qMIBGYVdvpEKK+zLaBniWm+8i0gi07GoVq47qj9G37dQdHFQzgPplaax6ekIZMHzxp3O+9NsuqJrE5C4rSxeQ1GlhxcCwBKremvmTiQveRI8je+CXWg+ATmu896C9kJas1I+pyj8/qSKXf8AZxAX00/SkNLrLyk8zjowWaXCbkImGlmKeOaD1pkE7K6JyAdL2561i1bykYfpWozYi4eD97V0KFVj5aWZ5SLAEsCLDYV6UYkqQ8oAYohdAqTwteI3xJ+KZ6WHPklgD9X28TrJG5JJA/lEL1+YOeSPKIy5h5rfHYiZqIeDCf0UQGQadT5gKnWwt39I32jTXwhWp5/DFy3FqLkuDCqInqAH6tCoBx0nCnNPbt/uXykOz7OH4d+J70GnpIOdYsudKsw76zN+ITIqx/6EaSWja0ijrQfhbLKqLtM3fl4GOti1KhchthYGx7Z+bnQ+LK4txkRdTzRSPHJRgfC1cvAUuiezNqiGOhodfxbdBMDH2LiOobW7xZH1ST4k1ZYVzt3L1aeIPpTXhKi7xQLKx0z0Jom00i7kNKeVaRY22dthE+RDCPuDewo10TWk1m/Sq60Sm8AFhEvGSbprH4bf7Kn0gpc6IxFn+5m/lX1rk8pQm1qfs2QHkc15yNw6jpfUAUFbDZCcTlpkDplM1Ap8bsxSAGavvR+A9mydJRQtT9U0N/WC8GL8oGvS5WrlPUE5NuzYkId1BkH9431ER+uPYJeeZdbBKpRwI/ixOoLnYtEx3NRLDup39YRkCs7o078QzGbg/esspvCZz+0MrgM0/jT3AtfrTcsq+6d0IC03d7FhphAFxU6Ms6zU8J7h3p9voh2I13vW0QQ1Zzmt4Pa+OhHM/PqBP9aYMtAGwmHdO+Chs2eWA7IYDcc8HIItG+kN5K5LB+3dvbC1x1vFBPShBVLcoUI6DEZ/DgnK5Ce7uSDazza0ou8Hy9pG2OG1JF5XDfyKbtaAs1UvGd+hJgVUv/n4CojyTJ4X1twxWjzDcPoTQNPIkztKbmZMaiFi0AUFH1OL1tBaerSs2G3/wyS5evbrrE8CkaRujQg73ghmnxYykkbGGAGOgQtLe5QDyCa06v9F63Bq2lwKFFfbI64ZQj/Nlb0LMb0xCFxkjktdECXU1kzpwJQfaAba9dp4bc4TAhB6cIRcFDWL4jOhO0PcNh5M+6RmKErDCFGbyve8DU2ecV34OR6FIBNKHfS7gZ7Kq88Oe6onNchccF8/lfQJcm9YI6k80SFHB5NlaYGA==
+      expiration: 86400000 # 1 day
+      refresh-token:
+        expiration: 604800000 # 7 days

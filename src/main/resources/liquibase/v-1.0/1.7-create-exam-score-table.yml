@@ -1,0 +1,57 @@
+databaseChangeLog:
+  - changeSet:
+      id: "8"
+      author: "developer-2"
+      changes:
+        - createTable:
+            tableName: "exam_score"
+            columns:
+              - column:
+                  name: "id"
+                  type: "bigint"
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: "user_id"
+                  type: "bigint"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: "subject_assign_id"
+                  type: "bigint"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: "score"
+                  type: "integer"
+                  constraints:
+                    nullable: true
+              - column:
+                  name: "created_date"
+                  type: "timestamp"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: "modified_date"
+                  type: "timestamp"
+                  constraints:
+                    nullable: true
+              - column:
+                  name: "status"
+                  type: "integer"
+                  constraints:
+                    nullable: true
+        - addForeignKeyConstraint:
+            baseTableName: "exam_score"
+            baseColumnNames: "user_id"
+            referencedTableName: "user"
+            referencedColumnNames: "id"
+            constraintName: "fk_exam_score_user"
+        - addForeignKeyConstraint:
+            baseTableName: "exam_score"
+            baseColumnNames: "subject_assign_id"
+            referencedTableName: "subject_assign"
+            referencedColumnNames: "id"
+            constraintName: "fk_exam_score_subject_assign"

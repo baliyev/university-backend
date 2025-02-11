@@ -1,0 +1,62 @@
+databaseChangeLog:
+  - changeSet:
+      id: "7"
+      author: "developer-2"
+      changes:
+        - createTable:
+            tableName: "subject_assign"
+            columns:
+              - column:
+                  name: "id"
+                  type: "bigint"
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: "semester_id"
+                  type: "bigint"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: "subject_id"
+                  type: "bigint"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: "hour"
+                  type: "integer"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: "credit"
+                  type: "integer"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: "created_date"
+                  type: "timestamp"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: "modified_date"
+                  type: "timestamp"
+                  constraints:
+                    nullable: true
+              - column:
+                  name: "status"
+                  type: "integer"
+                  constraints:
+                    nullable: true
+        - addForeignKeyConstraint:
+            baseTableName: "subject_assign"
+            baseColumnNames: "semester_id"
+            referencedTableName: "semester"
+            referencedColumnNames: "id"
+            constraintName: "fk_subject_assign_semester"
+        - addForeignKeyConstraint:
+            baseTableName: "subject_assign"
+            baseColumnNames: "subject_id"
+            referencedTableName: "subject"
+            referencedColumnNames: "id"
+            constraintName: "fk_subject_assign_subject"

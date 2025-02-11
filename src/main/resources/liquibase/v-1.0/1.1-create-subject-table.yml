@@ -1,0 +1,40 @@
+databaseChangeLog:
+  - changeSet:
+      id: "2"
+      author: "developer-1"
+      changes:
+        - createTable:
+            tableName: "subject"
+            columns:
+              - column:
+                  name: "id"
+                  type: "bigint"
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: "title"
+                  type: "varchar(255)"
+                  constraints:
+                    nullable: true
+              - column:
+                  name: "description"
+                  type: "varchar(255)"
+                  constraints:
+                    nullable: true
+              - column:
+                  name: "created_date"
+                  type: "timestamp"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: "modified_date"
+                  type: "timestamp"
+                  constraints:
+                    nullable: true
+              - column:
+                  name: "status"
+                  type: "integer"
+                  constraints:
+                    nullable: true

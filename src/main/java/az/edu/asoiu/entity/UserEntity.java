@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
 import static jakarta.persistence.EnumType.STRING;
@@ -27,22 +28,37 @@ public class UserEntity extends AbstractEntity implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
+    @Column(nullable = false)
     private String firstname;
+    @Column(nullable = false)
     private String lastname;
+    @Column(nullable = false)
     private String patronymic;
+    @Column(nullable = false)
     private String password;
+    @Column(nullable = false, unique = true)
     private String username;
     private String email;
     private String phone;
+    private int admissionYear;
     private LocalDate birthday;
     @Enumerated(STRING)
+    @Column(nullable = false)
     private Role role;
-    @OneToMany(mappedBy = "user")
-    private Set<TokenEntity> tokens;
 
+    @ToString.Exclude
+    @OneToMany(mappedBy = "user")
+    private Set<TokenEntity> tokens  = new HashSet<>();
+
+    @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "faculty_id", nullable = false)
     public FacultyEntity faculty;
+
+    @ToString.Exclude
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "group_id")
+    public StudentGroupEntity group;
 
     @Builder.Default
     private boolean isAccountNonExpired = TRUE;
@@ -62,4 +78,12 @@ public class UserEntity extends AbstractEntity implements UserDetails {
     public String getUsername() {
         return username;
     }
+
+    @ToString.Exclude
+    @ManyToMany(mappedBy = "users")
+    private Set<SubjectAssignEntity> subjectAssignEntities = new HashSet<>();
+
+    @ToString.Exclude
+    @OneToMany(mappedBy = "user")
+    private Set<ExamScoreEntity> exams = new HashSet<>();
 }

@@ -1,0 +1,44 @@
+databaseChangeLog:
+  - changeSet:
+      id: "1"
+      author: "developer-1"
+      changes:
+        - createTable:
+            tableName: "semester"
+            columns:
+              - column:
+                  name: "id"
+                  type: "bigint"
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: "year"
+                  type: "integer"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: "type"
+                  type: "varchar(255)"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: "created_date"
+                  type: "timestamp"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: "modified_date"
+                  type: "timestamp"
+                  constraints:
+                    nullable: true
+              - column:
+                  name: "status"
+                  type: "integer"
+                  constraints:
+                    nullable: true
+        - addUniqueConstraint:
+            tableName: "semester"
+            columnNames: "year, type"
+            constraintName: "uc_semester_year_type"

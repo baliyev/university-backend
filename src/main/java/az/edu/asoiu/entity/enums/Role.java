@@ -28,8 +28,7 @@ public enum Role {
                     STUDENT_UPDATE,
                     STUDENT_DELETE,
                     STUDENT_CREATE
-            ),
-            USER.permissions
+            )
     ),
     TEACHER(
             Set.of(
@@ -37,9 +36,7 @@ public enum Role {
                     TEACHER_UPDATE,
                     TEACHER_DELETE,
                     TEACHER_CREATE
-            ),
-            STUDENT.permissions,
-            USER.permissions
+            )
     ),
     MODERATOR(
             Set.of(
@@ -47,10 +44,7 @@ public enum Role {
                     MODERATOR_READ,
                     MODERATOR_DELETE,
                     MODERATOR_UPDATE
-            ),
-            TEACHER.permissions,
-            STUDENT.permissions,
-            USER.permissions
+            )
     ),
     ADMIN(
             Set.of(
@@ -58,23 +52,10 @@ public enum Role {
                     ADMIN_UPDATE,
                     ADMIN_DELETE,
                     ADMIN_CREATE
-            ),
-            MODERATOR.permissions,
-            TEACHER.permissions,
-            STUDENT.permissions,
-            USER.permissions
+            )
     );
 
     private final Set<Permission> permissions;
-
-    @SafeVarargs
-    Role(Set<Permission> permissions, Set<Permission>... inheritedPermissions) {
-        this.permissions = new HashSet<>();
-        this.permissions.addAll(permissions);
-        for (Set<Permission> inherited : inheritedPermissions) {
-            this.permissions.addAll(inherited);
-        }
-    }
 
     public Set<SimpleGrantedAuthority> getAuthorities() {
         return Stream.concat(

@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - changeSet:
+      id: "10"
+      author: "developer-2"
+      context: dev
+      changes:
+        - sqlFile:
+            path: liquibase/sql/mock-data.sql

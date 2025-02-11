@@ -1,0 +1,33 @@
+databaseChangeLog:
+  - changeSet:
+      id: "9"
+      author: "developer-1"
+      changes:
+        - createTable:
+            tableName: "subject_assign_x_user"
+            columns:
+              - column:
+                  name: "subject_assign_id"
+                  type: "bigint"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: "user_id"
+                  type: "bigint"
+                  constraints:
+                    nullable: false
+        - addPrimaryKey:
+            tableName: "subject_assign_x_user"
+            columnNames: "subject_assign_id, user_id"
+        - addForeignKeyConstraint:
+            baseTableName: "subject_assign_x_user"
+            baseColumnNames: "subject_assign_id"
+            referencedTableName: "subject_assign"
+            referencedColumnNames: "id"
+            constraintName: "fk_subject_assign_user_subject_assign"
+        - addForeignKeyConstraint:
+            baseTableName: "subject_assign_x_user"
+            baseColumnNames: "user_id"
+            referencedTableName: "user"
+            referencedColumnNames: "id"
+            constraintName: "fk_subject_assign_user_user"

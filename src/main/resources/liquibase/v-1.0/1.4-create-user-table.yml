@@ -68,11 +68,15 @@ databaseChangeLog:
                   name: "faculty_id"
                   type: "bigint"
                   constraints:
-                    nullable: false
+                    foreignKeyName: fk_user_faculty_id
+                    references: faculty(id)
+                    nullable: true
               - column:
                   name: "group_id"
                   type: "bigint"
                   constraints:
+                    foreignKeyName: fk_user_student_group_id
+                    references: student_group(id)
                     nullable: true
               - column:
                   name: "is_account_non_expired"
